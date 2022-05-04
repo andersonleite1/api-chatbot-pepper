@@ -1,4 +1,15 @@
-const { writeFile } = require('fs/promises');
+const { readFile, writeFile } = require('fs/promises');
+
+const getData = async (displayName) => {
+  try {
+    const textData = await readFile('data/infor.json', 'utf-8');
+    const data = JSON.parse(textData);
+
+    return { code: 200, data };
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const create = async (displayName) => {
   try {
@@ -31,6 +42,7 @@ const clear = async () => {
 };
 
 module.exports = {
+  getData,
   create,
   clear,
 };
