@@ -5,7 +5,11 @@ const keyWord = require('../controllers/keyWordController');
 const router = express.Router();
 
 router
-    .post(
+  .get(
+    '/',
+    keyWord.getData
+  )
+  .post(
     '/',
     keyWord.create
   )
