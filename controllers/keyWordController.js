@@ -1,5 +1,14 @@
 const keyWordModel = require('../models/keyWordModel');
 
+const getData = async (_req, res, next) => {
+  try {
+    const { code, data } = await keyWordModel.getData();
+    return res.status(code).json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const create = async (req, res, next) => {
   try {
     const { displayName } = req.body.queryResult.intent;
@@ -21,6 +30,7 @@ const clear = async (_req, res, next) => {
 };
 
 module.exports = {
+  getData,
   create,
   clear
 };
