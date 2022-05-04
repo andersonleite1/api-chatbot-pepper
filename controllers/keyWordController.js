@@ -23,7 +23,7 @@ const create = async (req, res, next) => {
 const clear = async (_req, res, next) => {
   try {
     const { code } = await keyWordModel.clear();
-    return res.status(code).end();
+    return res.setHeader("Access-Control-Allow-Origin", "*").status(code).end();
   } catch (err) {
     next(err);
   }
