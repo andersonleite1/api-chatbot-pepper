@@ -3,7 +3,7 @@ const keyWordModel = require('../models/keyWordModel');
 const getData = async (_req, res, next) => {
   try {
     const { code, data } = await keyWordModel.getData();
-    return res.status(code).json(data);
+    return res.setHeader("Access-Control-Allow-Origin", "*").status(code).json(data);
   } catch (err) {
     next(err);
   }
