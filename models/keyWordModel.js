@@ -1,6 +1,6 @@
 const { readFile, writeFile } = require('fs/promises');
 
-const getData = async (displayName) => {
+const getData = async () => {
   try {
     const textData = await readFile('data/infor.json', 'utf-8');
     const data = JSON.parse(textData);
@@ -11,10 +11,11 @@ const getData = async (displayName) => {
   }
 };
 
-const create = async (displayName) => {
+const create = async (displayName, queryText) => {
   try {
     const data = {
-      name: displayName
+      intent: displayName,
+      queryText: queryText
     };
 
     const stringData = JSON.stringify(data, null, 2);
@@ -29,7 +30,8 @@ const create = async (displayName) => {
 const clear = async () => {
   try {
     const data = {
-      name: ''
+      intent: '',
+      queryText: ''
     };
 
     const stringData = JSON.stringify(data, null, 2);

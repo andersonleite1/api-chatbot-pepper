@@ -11,9 +11,9 @@ const getData = async (_req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { displayName } = req.body.queryResult.intent;
+    const { intent: { displayName }, queryText } = req.body.queryResult;
 
-    const { code } = await keyWordModel.create(displayName);
+    const { code } = await keyWordModel.create(displayName, queryText);
     return res.status(code).end();
   } catch (err) {
     next(err)
