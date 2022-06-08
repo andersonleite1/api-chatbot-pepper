@@ -1,4 +1,5 @@
 const keyWordModel = require('../models/keyWordModel');
+const User = require('../models/userModel');
 
 const getData = async (_req, res, next) => {
   try {
@@ -11,9 +12,13 @@ const getData = async (_req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { intent: { displayName }, queryText } = req.body.queryResult;
+    const { intent: { displayName }, parameters, queryText } = req.body.queryResult;
 
-    const { code } = await keyWordModel.create(displayName, queryText);
+    const username = parameters['username'];
+
+    if(username) await User.create(username);
+
+    const { code } = await keyWordModel.create(displayName, queryText, username);
     return res.status(code).end();
   } catch (err) {
     next(err)
