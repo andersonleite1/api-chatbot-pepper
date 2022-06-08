@@ -13,6 +13,10 @@ app.use(
   '/webhook',
   router.keyWord
 );
+app.use(
+  '/user',
+  router.user
+);
 
 app.get('/', (_req, res) => res.status(200).json({mesage: "Server Is Working"}));
 
