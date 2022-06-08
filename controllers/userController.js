@@ -20,6 +20,5 @@ const clear = async (_req, res, next) => {
 
 module.exports = {
   getUser,
-  create,
   clear
 };
