@@ -2,7 +2,7 @@ const { readFile, writeFile } = require('fs/promises');
 
 const getUser = async () => {
   try {
-    const textData = await readFile('data/user.json', 'utf-8');
+    const textData = await readFile('database/user.json', 'utf-8');
     const user = JSON.parse(textData);
 
     return { code: 200, user };
@@ -19,7 +19,7 @@ const create = async (username) => {
 
     const stringData = JSON.stringify(data, null, 2);
     
-    await writeFile('data/user.json', stringData);
+    await writeFile('database/user.json', stringData);
     return { code: 201 };
   } catch (err) {
     console.log(err);
@@ -34,7 +34,7 @@ const clear = async () => {
 
     const stringData = JSON.stringify(data, null, 2);
   
-    await writeFile('data/user.json', stringData);
+    await writeFile('database/user.json', stringData);
     return { code: 200 };
   } catch (err) {
     console.log(err);
