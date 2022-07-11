@@ -2,7 +2,7 @@ const { readFile, writeFile } = require('fs/promises');
 
 const getData = async () => {
   try {
-    const textData = await readFile('data/infor.json', 'utf-8');
+    const textData = await readFile('database/infor.json', 'utf-8');
     const data = JSON.parse(textData);
 
     return { code: 200, data };
@@ -11,16 +11,17 @@ const getData = async () => {
   }
 };
 
-const create = async (displayName, queryText) => {
+const create = async (displayName, queryText, fulfillmentText) => {
   try {
     const data = {
       intent: displayName,
-      queryText: queryText
+      queryUser: queryText,
+      queryChatbot: fulfillmentText
     };
 
     const stringData = JSON.stringify(data, null, 2);
     
-    await writeFile('data/infor.json', stringData);
+    await writeFile('database/infor.json', stringData);
     return { code: 201 };
   } catch (err) {
     console.log(err);
@@ -31,12 +32,13 @@ const clear = async () => {
   try {
     const data = {
       intent: '',
-      queryText: ''
+      queryUser: '',
+      queryChatbot: ''
     };
 
     const stringData = JSON.stringify(data, null, 2);
   
-    await writeFile('data/infor.json', stringData);
+    await writeFile('database/infor.json', stringData);
     return { code: 200 };
   } catch (err) {
     console.log(err);
